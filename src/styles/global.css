@@ -1,0 +1,30 @@
+:root {
+  --mm-orange: #FF3D02;
+  --mm-black: #000000;
+  --mm-white: #FFFFFF;
+  --mm-grey-light: #F5F5F5;
+  --mm-grey-mid: #E0E0E0;
+  --mm-grey-text: #666666;
+  --font-heading: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+  --font-body: 'Inter', Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  background: var(--mm-grey-light);
+  color: var(--mm-black);
+  min-height: 100vh;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.shake { animation: shake 0.3s ease; }
