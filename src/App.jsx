@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import StepIndicator from './components/StepIndicator.jsx';
 import Step1Business from './components/Step1Business.jsx';
 import Step2Campaign from './components/Step2Campaign.jsx';
 import Step3Brand from './components/Step3Brand.jsx';
 import ConfirmationScreen from './components/ConfirmationScreen.jsx';
+import Guide from './pages/Guide.jsx';
 import { WORKER_URL, MM_SECRET } from './config.js';
 
 const INITIAL_FIELDS = {
@@ -111,11 +113,15 @@ export default function App() {
     setSubmitError('');
   }
 
-  return (
+  const formJSX = (
     <>
       <header className="header">
         <span className="header__wordmark">MM</span>
         <span className="header__title">New Landing Page Brief</span>
+        <Link to="/guide" style={{ color: 'white', opacity: 0.6, fontSize: 13, textDecoration: 'none' }}
+          onMouseEnter={e => e.currentTarget.style.opacity = 1}
+          onMouseLeave={e => e.currentTarget.style.opacity = 0.6}
+        >Guide</Link>
       </header>
 
       <div className="content">
@@ -140,5 +146,14 @@ export default function App() {
         )}
       </div>
     </>
+  );
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={formJSX} />
+        <Route path="/guide" element={<Guide />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
