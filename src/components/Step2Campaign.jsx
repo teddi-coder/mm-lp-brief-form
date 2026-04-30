@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const GA4_RE = /^G-[A-Z0-9]+$/;
 
-export default function Step2Campaign({ fields, update, onNext, onBack }) {
+export default function Step2Campaign({ fields, update, onNext, onBack, useStoredConfig, selectedClientName, isSubmitting, submitError }) {
   const [errors, setErrors] = useState({});
   const [shaking, setShaking] = useState({});
 
@@ -39,7 +39,7 @@ export default function Step2Campaign({ fields, update, onNext, onBack }) {
       }, 50);
       return;
     }
-    onNext();
+    onNext(); // onNext is handleSubmit when useStoredConfig, goNext otherwise
   }
 
   function inp(name, label, props = {}, optional = false) {
@@ -62,6 +62,13 @@ export default function Step2Campaign({ fields, update, onNext, onBack }) {
   return (
     <div className="form-card">
       <h2 className="form-card__title">Campaign Details</h2>
+
+      {useStoredConfig && selectedClientName && (
+        <div className="client-badge">
+          <span className="label-tag">Building for</span>
+          <span className="client-name">{selectedClientName}</span>
+        </div>
+      )}
 
       {inp('primaryService', 'Primary service', { type: 'text', placeholder: 'e.g. Logbook Servicing' })}
       {inp('supportingServices', 'Supporting services', { type: 'text', placeholder: 'e.g. Tyres, Brakes, Batteries' })}
@@ -124,9 +131,13 @@ export default function Step2Campaign({ fields, update, onNext, onBack }) {
 
       {inp('ga4MeasurementId', 'GA4 Measurement ID', { type: 'text', placeholder: 'G-XXXXXXXXXX' })}
 
+      {submitError && <p className="submit-error">{submitError}</p>}
+
       <div className="form-nav">
         <button className="btn-back" onClick={onBack}>← Back</button>
-        <button className="btn-next" onClick={handleNext}>Next →</button>
+        <button className="btn-next" onClick={handleNext} disabled={isSubmitting}>
+          {useStoredConfig ? (isSubmitting ? 'Submitting...' : 'Submit →') : 'Next →'}
+        </button>
       </div>
     </div>
   );
