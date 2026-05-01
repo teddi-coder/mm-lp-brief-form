@@ -60,8 +60,9 @@ export default function Guide() {
               heading: 'Open the brief form',
               body: (
                 <>
-                  <p>Go to <strong>mm-brief.mechanicmarketing.co</strong> — fill in the 3-step form with the client's business details, campaign details, and brand colours/fonts. Takes about 5 minutes.</p>
-                  <p>Have these ready before you start: phone number, Google review count + rating, target suburb, primary service, the Google Ads keyword theme, and hex codes for the brand colours.</p>
+                  <p>Go to <strong>mm-brief.mechanicmarketing.co</strong>.</p>
+                  <p><strong>Returning client:</strong> Select the client from the dropdown — you'll skip straight to campaign fields (service, suburb, keyword theme). Takes about 2 minutes. Business and brand details are loaded automatically from the stored config.</p>
+                  <p><strong>New client:</strong> Select "New client" and fill in the full 3-step form (business details, campaign details, brand colours/fonts). Takes about 5 minutes. Have these ready: phone number, Google review count + rating, target suburb, primary service, Google Ads keyword theme, and hex codes for the brand colours.</p>
                 </>
               ),
             },
@@ -89,7 +90,9 @@ export default function Guide() {
                     Logo →  assets/images/[clientslug]/logo.png{'\n'}
                     Hero →  assets/images/[clientslug]/hero.jpg
                   </code>
-                  <p style={{ marginTop: 8 }}>If the client doesn't have images yet, the page uses a solid brand colour background as fallback — that's fine. Merge and add images later.</p>
+                  <p style={{ marginTop: 8 }}><strong>Important — images must be downloaded locally first.</strong> Do not reference images by copying a URL from the client's website. Most workshop sites hotlink-block images served to other domains, which causes broken placeholders on the live page.</p>
+                  <p>Compress everything before uploading — nothing over 200kb. Use <strong>squoosh.app</strong> (free, browser-based). Every image needs a descriptive <code>alt</code> attribute. Set <code>loading="eager"</code> on the hero image and <code>loading="lazy"</code> on everything else.</p>
+                  <p>If the client doesn't have images yet, the page uses a solid brand colour background as fallback — that's fine. Do not use random stock images as placeholders. Merge and add real images later.</p>
                 </>
               ),
             },
@@ -228,6 +231,10 @@ export default function Guide() {
           ))}
 
           <div className="alert-box" style={{ marginTop: 16 }}>
+            <strong>If a client needs a booking widget instead of a call/form CTA:</strong> Option A — use a Tally embed iframe in the hero form slot (swap the hero variant in the HTML). Option B — Podium booking request integration: form submits to a Worker, creates a Podium thread, sends an automated text to the customer. Option B replicates the Core Diesel pattern and requires a Worker build per client. Contact Teddi to set up Option B.
+          </div>
+
+          <div className="alert-box" style={{ marginTop: 12 }}>
             <strong>Note on the workflow doc:</strong> The workflow doc currently references <code>github.com/mechanicmarketing/mm-lp-template</code> as the clone URL. Until the org is created and the repo is transferred, the correct URL is <code>github.com/teddi-coder/mm-lp-template</code>. Do a find-and-replace before sharing the doc with anyone new.
           </div>
         </section>
